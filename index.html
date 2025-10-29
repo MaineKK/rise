@@ -106,6 +106,29 @@
       })()
     </script>
   </head>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const sc = document.scrollingElement || document.documentElement;
+    let sent = false;
+
+    function atBottom() {
+      return sc.scrollHeight - sc.scrollTop - sc.clientHeight <= 2;
+    }
+
+    function notifyIfBottom() {
+      if (!sent && atBottom()) {
+        sent = true;
+        window.parent.postMessage({ type: 'WEB_LESSON_DONE' }, '*');
+        window.removeEventListener('scroll', onScroll); 
+      }
+    }
+
+    const onScroll = () => requestAnimationFrame(notifyIfBottom);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    notifyIfBottom(); 
+  });
+</script>
+
   <body>
     <div id="app"></div>
     <script type="text/javascript">
