@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
   <head>
     <title>Goodbye</title>
-    <meta charset="utf-8">
+    <meta charset="utf-8" lang="es">
     <style>
       html {
         font-size: 20px;
@@ -29,28 +29,7 @@
   <body>
     <div class="goodbye-container">
       <div class="bye-message">👋 ¡Adiós!</div>
-      <div class="exit-text">Puede continuar al siguiente paso.</div>
+      <div class="exit-text">Ahora puede salir de esta página.</div>
     </div>
-
-    <script>
-      (function () {
-        function notify() {
-          try {
-            window.parent.postMessage(
-              { type: "riseAllBlocksDone", reason: "goodbye-loaded" },
-              "*"
-            );
-          } catch (e) {
-            console.warn("No se pudo enviar la señal a Storyline:", e);
-          }
-        }
-        if (document.readyState === "loading") {
-          document.addEventListener("DOMContentLoaded", notify);
-        } else {
-          notify();
-        }
-      })();
-    </script>
   </body>
 </html>
-
